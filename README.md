@@ -26,7 +26,9 @@ In training phase, we train so that the VAE should be able to produce the exact 
 Our loss function is not complete yet. There is one more contributor to our loss function. It is the KL divergence that we had seen earlier. Our aim is to decrease the reconstruction loss as well as the KL divergence. If we simply look at the reconstruction loss, out model may simply start replicating given inputs. But with the KL divergence term, it will be able to come up with new sentences. Our total loss is the sum of reconstruction loss and KL divergence. 
 Here we are finding the KL divergence between q(z/x) and p(z/x) where z is our latent variable and q(z/x) is approximation of p(z/x). It is difficult for us to find p(z/x) directly as p(z/x) = p(x/z)p(z)/p(x) and p(x) is computationally infeasible. Hence we approximate it with q(z/x) and try to keep the KL divergence between q(z/x) and p(z/x) to the minimum so that q(z/x) remains as a good approximation of p(z/x).
 
-In the above loss function, a and b denote coefficients of reconstruction loss and KL divergence respectively. In our implementation, we will use cross entropy loss to find reconstruction loss. We have used coefficient of reconstruction loss as 8 and coefficient of KL divergence as 0.001.
+In our implementation, we will use cross entropy loss to find reconstruction loss. We have used coefficient of reconstruction loss as 8 and coefficient of KL divergence as 0.001.
 This error is backpropagated in our neural network in order to calculate gradient of error with respect to each of the network weights and calculate the updated weights. This backpropagation and weight updation is done at the end of each batch. We are using a batch size of 128. This means weights will be updated whenever inspection of a batch of 128 sentences is completed. For optimization, we are using Adam optimizer with a learning rate of 0.0001.
+
+Run train.py to train and save the model. Run generate_sentences.py by updating input sentence to genertae new sentences.
 
 
